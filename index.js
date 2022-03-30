@@ -37,10 +37,6 @@ connection
   .then(() => console.log('Conexão foi bem sucedida'))
   .catch((error) => console.log('Erro ao conectar ao banco de dados', error));
 
-app.listen(8000, () => {
-  console.log('Servidor iniciado com sucesso');
-});
-
 app.get('/', (req, res) => {
   const session = req.session.user;
   Article.findAll({ order: [['createdAt', 'DESC']], limit: 4 })
@@ -86,4 +82,10 @@ app.get('/category/:slug', (req, res) => {
       }
     })
     .catch((error) => res.redirect('/'));
+});
+
+const port = process.env.PORT || 8000;
+
+app.listen(port, () => {
+  console.log('Servidor iniciado com sucesso');
 });

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%-include ('partials/header.ejs'); %>
+  <body>
+    <%-include ('partials/navbar.ejs'); %>
+    <div class="container w-50">
+      <div class="mt-4">
+        <h1 class="display-4">Bem vindo</h1>
+        <p class="lead">Blog criado para estudo de NodeJS</p>
+        <hr class="my-4" />
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
+          totam ratione eius facilis corporis quas?
+        </p>
+      </div>
+
+      <% articles.forEach(article => { %>
+      <div class="card my-3">
+        <div class="card-header">
+          <h2><%= article.title %></h2>
+        </div>
+        <div class="card-body">
+          <a href="/<%=article.slug%>" class="btn btn-success">Ler artigo</a>
+        </div>
+      </div>
+      <% }) %>
+
+      <div>
+        <a href="/articles/page/1" class="btn btn-primary" style="float: right">
+          <i class="bi bi-arrow-right-short" style="font-size: 20px"></i>
+        </a>
+      </div>
+    </div>
+  </body>
+  <%-include ('partials/footer.ejs'); %>
+</html>

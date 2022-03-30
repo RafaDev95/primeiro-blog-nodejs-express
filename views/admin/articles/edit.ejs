@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%-include ('../../partials/header.ejs'); %>
+  <body>
+    <%-include ('../../partials/navbar.ejs'); %>
+    <div class="container w-75 pt-5">
+      <div class="card">
+        <div class="card-header">
+          <h2>Editar artigo</h2>
+        </div>
+        <div class="card-body">
+          <form action="/article/update" method="POST">
+            <input
+              type="text"
+              class="form-control mb-3"
+              name="title"
+              placeholder="Defina o novo título do artigo"
+            />
+            <textarea
+              name="body"
+              class="form-control mb-2"
+              placeholder="Defina seu novo artigo"
+              id="article"
+            ></textarea>
+            <input type="hidden" name="id" value="<%= article.id%>" />
+            <label class="my-2">Categoria</label>
+            <select class="form-control" name="category">
+              <% categories.forEach((category) => { %> <%if(category.id ===
+              article.categoryId) { %>
+              <option value="<%= category.id %>" selected>
+                <%=category.title %>
+              </option>
+              <%} else { %>
+
+              <option value="<%= category.id %>"><%=category.title %></option>
+              <%} %> <%})%>
+            </select>
+            <br />
+            <button class="btn btn-success">Atualizar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="content" style="display: none"><%= article.body%></div>
+  </body>
+  <%-include ('../../partials/footer.ejs'); %>
+
+  <script src="/tinymce/tinymce.min.js"></script>
+  <script>
+    const content = document.querySelectorAll('#content');
+    tinymce.init({
+      selector: '#article',
+      plugins: [
+        'advlist',
+        'autolink',
+        'link',
+        'image',
+        'lists',
+        'print',
+        'preview',
+        'hr',
+        'searchreplace',
+        ' wordcount',
+        'fullscreen',
+        'insert',
+        'datetime',
+        'media',
+        'save',
+        'table',
+        'paste',
+        'emoticons',
+      ],
+      init_instance_callback: () => {
+        tinymce.get('article').setContent(content[0].innerText);
+      },
+      language: 'pt_BR',
+    });
+  </script>
+</html>

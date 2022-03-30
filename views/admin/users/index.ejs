@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%-include ('../../partials/header.ejs'); %>
+  <body>
+    <%-include ('../../partials/navbar.ejs'); %>
+    <div class="container w-50 pt-5">
+      <h2 class="mb-4">Lista de usuários:</h2>
+      <button class="btn btn-primary">Criar novo usuário</button>
+      <table class="table table-bordered mt-3">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% users.forEach(user => { %>
+          <tr>
+            <td><%=user.id%></td>
+            <td><%=user.email%></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+  <%-include ('../../partials/footer.ejs'); %>
+</html>
